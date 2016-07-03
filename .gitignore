@@ -11,3 +11,6 @@ reports
 
 # Mac OS
 .DS_Store
+
+#Firebase
+app/google-services.json
