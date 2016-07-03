@@ -1,7 +1,10 @@
 package me.droan.udacityshowcase;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.google.firebase.database.ChildEventListener;
@@ -9,7 +12,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,41 +24,11 @@ public class ShowcaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.showcase_activity);
+        final ShowcaseAdapter adapter = new ShowcaseAdapter(this);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new UnscrollableLinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("hello");
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Log.d(TAG, "Value is: " + value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
-        DatabaseReference myRef3 = database.getReference("posts:/post_1");
-
-        myRef3.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                Post value = dataSnapshot.getValue(Post.class);
-                Log.d(TAG, "Value is: " + value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
-
         DatabaseReference myRef2 = database.getReference("posts:");
         myRef2.addChildEventListener(new ChildEventListener() {
             @Override
@@ -64,6 +36,7 @@ public class ShowcaseActivity extends AppCompatActivity {
                 Log.d(TAG, "onChildAdded() called with: " + "dataSnapshot = [" + dataSnapshot + "], s = [" + s + "]");
                 Post value = dataSnapshot.getValue(Post.class);
                 posts.add(value);
+                adapter.refresh(posts);
 
             }
 
@@ -87,5 +60,21 @@ public class ShowcaseActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private static class UnscrollableLinearLayoutManager extends LinearLayoutManager {
+        public UnscrollableLinearLayoutManager(Context context) {
+            super(context, LinearLayoutManager.VERTICAL, false);
+        }
+
+        @Override
+        public boolean canScrollHorizontally() {
+            return false;
+        }
+
+        @Override
+        public boolean canScrollVertically() {
+            return false;
+        }
     }
 }
