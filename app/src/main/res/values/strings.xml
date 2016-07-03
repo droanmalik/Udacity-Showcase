@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Udacity Showcase</string>
+    <string name="cd_logo">Logo</string>
+    <string name="cd_playstore">open in play store</string>
+    <string name="cd_share">share</string>
+    <string name="cd_like">like</string>
 </resources>
