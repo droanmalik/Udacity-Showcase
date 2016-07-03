@@ -1,4 +1,4 @@
-package me.droan.udacityshowcase;
+package me.droan.udacityshowcase.showcase;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import me.droan.udacityshowcase.data.Post;
+import me.droan.udacityshowcase.R;
 
 /**
  * Created by drone on 03-07-2016.

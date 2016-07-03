@@ -1,6 +1,8 @@
-package me.droan.udacityshowcase;
+package me.droan.udacityshowcase.showcase;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -8,6 +10,8 @@ import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import me.droan.udacityshowcase.data.Post;
+import me.droan.udacityshowcase.R;
 
 /**
  * Created by drone on 03-07-2016.
@@ -20,6 +24,7 @@ public class ShowcaseItem extends FrameLayout {
     @Bind(R.id.description)
     TextView description;
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public ShowcaseItem(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }

@@ -1,4 +1,4 @@
-package me.droan.udacityshowcase;
+package me.droan.udacityshowcase.data;
 
 /**
  * Created by drone on 03-07-2016.
