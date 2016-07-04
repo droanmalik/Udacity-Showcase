@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/rate"
+        android:icon="@android:drawable/star_big_off"
+        android:title="favorite"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/about"
+        android:icon="@android:drawable/star_big_off"
+        android:title="about"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/admin"
+        android:icon="@android:drawable/star_big_off"
+        android:title="admin"
+        app:showAsAction="never" />
+
+</menu>
